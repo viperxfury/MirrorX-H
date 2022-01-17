@@ -6,8 +6,8 @@ CWD = pathlib.Path(__file__).parent
 README = (CWD / "README.md").read_text()
 
 setup(
-    name='MirrorXHeroku',
-    version='6.0.13',
+    name='MirrorHerokuX',
+    version='6.0.2',
     packages=find_packages(),
     long_description=README,
     long_description_content_type="text/markdown",
@@ -56,7 +56,7 @@ setup(
     python_requires=">=3.7",
     entry_points={
         "console_scripts":[
-            "MirrorXBot = bot.__main__:main"
+            "MirrorHerokuXBot = bot.__main__:main"
         ]
 
     },

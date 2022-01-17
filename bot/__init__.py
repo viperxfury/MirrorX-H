@@ -266,6 +266,13 @@ try:
         RESTARTED_GROUP_ID = None
 except KeyError:
     RESTARTED_GROUP_ID = '-10016454463'    
+    
+try:
+    TIMEZONE = getConfig('TIMEZONE')
+    if len(TIMEZONE) == 0:
+        TIMEZONE = None
+except KeyError:
+    TIMEZONE = 'Asia/Kolkata'    
 
 updater = tg.Updater(token=BOT_TOKEN)
 bot = updater.bot

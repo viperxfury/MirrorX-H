@@ -1,3 +1,3 @@
 #!/bin/bash
-pip3 install -U MirrorXHeroku
-MirrorXHerokuBot
+pip3 install -U MirrorHerokuX
+MirrorHerokuXBot

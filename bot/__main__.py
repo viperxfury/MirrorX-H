@@ -4,6 +4,8 @@ import signal
 
 from sys import executable
 import time
+from datetime import datetime
+import pytz
 
 from telegram.ext import CommandHandler
 from bot import bot, dispatcher, updater, botStartTime
@@ -15,12 +17,14 @@ from bot.helper.telegram_helper.message_utils import *
 from .helper.ext_utils.bot_utils import get_readable_file_size, get_readable_time
 from .helper.ext_utils.bot_utils import *
 from .helper.telegram_helper.filters import CustomFilters
+from telegram.error import BadRequest, Unauthorized
 from .modules import authorize, list, cancel_mirror, mirror_status, mirror, clone, watch, delete, speedtest, count
 from .modules import *
 
 from pyrogram import idle
 from bot import app
 
+now = datetime.now(pytz.timezone(f'{TIMEZONE}'))
 
 def stats(update, context):
     currentTime = get_readable_time(time.time() - botStartTime)
@@ -122,7 +126,7 @@ botcmds = [
     (f'{BotCommands.TarWatchCommand}', 'Mirror yt-dlp supported link as tar'),
     (f'{BotCommands.CloneCommand}', 'Copy file/folder to Drive'),
     (f'{BotCommands.CountCommand}', 'Count file/folder of Drive'),
-    (f'{BotCommands.DeleteCommand}', 'Delete file/folder from Drive'),
+    (f'{BotCommands.deleteCommand}', 'Delete file/folder from Drive'),
     (f'{BotCommands.CancelMirror}', 'Cancel a task'),
     (f'{BotCommands.CancelAllCommand}', 'Cancel all downloading tasks'),
     (f'{BotCommands.ListCommand}', 'Search in Drive'),
@@ -137,7 +141,7 @@ botcmds = [
 def main():
     # Heroku restarted (Group Message)
     GROUP_ID = f'{RESTARTED_GROUP_ID}'
-    kie = datetime.now(pytz.timezone(f'Asia/Kolkata'))
+    kie = datetime.now(pytz.timezone(f'{TIMEZONE}'))
     jam = kie.strftime('\n 𝗗𝗮𝘁𝗲 : %d/%m/%Y\n 𝗧𝗶𝗺𝗲: %I:%M%P')
     if GROUP_ID is not None and isinstance(GROUP_ID, str):        
         try:
