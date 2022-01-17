@@ -1,8 +1,8 @@
  # Features added by Miss Emily - 
-👉 I have added a new Dockerfile with just a few version changes.
-👉 I have added Heroku Deployment Support.For now use CLI ,I will add Tutorial and Github Actions later.
-👉 I have added "RESTARTED_GROUP_ID" Specify the Group here where you want the restart message to be sent by the Bot
-👉 I have not added any features for now.But if I can I will add QBit
+👉 I have added a new Dockerfile with just a few version changes.<br>
+👉 I have added Heroku Deployment Support.For now use CLI ,I will add Tutorial and Github Actions later<br>
+👉 I have added "RESTARTED_GROUP_ID" Specify the Group here where you want the restart message to be sent by the Bot<br>
+👉 I have not added any features for now.But if I can I will add QBit<br>
  
  
  <p align="center">
