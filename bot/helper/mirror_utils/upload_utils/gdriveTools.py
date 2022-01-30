@@ -231,7 +231,7 @@ class GoogleDriveHelper:
         file_path = f"{file_dir}/{file_name}"
         size = get_readable_file_size(get_path_size(file_path))
         LOGGER.info("Uploading File: " + file_path)
-        self.start_time = time.time()
+        self.start_time = time()
         self.updater = setInterval(self.update_interval, self._on_upload_progress)
         if os.path.isfile(file_path):
             try:
@@ -705,7 +705,7 @@ class GoogleDriveHelper:
         file_id = self.getIdFromUrl(link)
         if USE_SERVICE_ACCOUNTS:
             self.service_account_count = len(os.listdir("accounts"))
-        self.start_time = time.time()
+        self.start_time = time()
         self.updater = setInterval(self.update_interval, self._on_download_progress)
         try:
             meta = self.getFileMetadata(file_id)

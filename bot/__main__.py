@@ -27,7 +27,7 @@ from bot import app
 now = datetime.now(pytz.timezone(f'{TIMEZONE}'))
 
 def stats(update, context):
-    currentTime = get_readable_time(time.time() - botStartTime)
+    currentTime = get_readable_time(time() - botStartTime)
     current = now.strftime('%m/%d %I:%M:%S %p')
     total, used, free = shutil.disk_usage('.')
     total = get_readable_file_size(total)
@@ -39,7 +39,7 @@ def stats(update, context):
     memory = psutil.virtual_memory().percent
     disk = psutil.disk_usage('/').percent
     stats = f'<b>Bot Uptime ⌚:</b> {currentTime}\n' \
-            f' Sᴛᴀʀᴛᴇᴅ Aᴛ : {current}\n' \
+            f'<b>Started At :</b> {current}\n' \
             f'<b>Total disk space🗄️:</b> {total}\n' \
             f'<b>Used 🗃️:</b> {used}  ' \
             f'<b>Free 🗃️:</b> {free}\n\n' \
@@ -53,7 +53,7 @@ def stats(update, context):
 
 def start(update, context):
     LOGGER.info('UID: {} - UN: {} - MSG: {}'.format(update.message.chat.id,update.message.chat.username,update.message.text))
-    uptime = get_readable_time((time.time() - botStartTime))
+    uptime = get_readable_time((time() - botStartTime))
     if CustomFilters.authorized_user(update) or CustomFilters.authorized_chat(update):
         if update.message.chat.type == "private" :
             reply_message = sendMessage(f"<b>🤗нєℓℓσ {update.message.chat.first_name}</b>,\n\nɯҽʅƈσɱҽ ƚσ ҽɱιʅყ ɱιɾɾσɾ Ⴆσƚ", context.bot, update)
@@ -73,9 +73,9 @@ def restart(update, context):
 
 
 def ping(update, context):
-    start_time = int(round(time.time() * 1000))
+    start_time = int(round(time() * 1000))
     reply = sendMessage("Starting Ping", context.bot, update)
-    end_time = int(round(time.time() * 1000))
+    end_time = int(round(time() * 1000))
     editMessage(f'{end_time - start_time} ms', reply)
 
 

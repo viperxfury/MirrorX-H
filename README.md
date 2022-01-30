@@ -1,9 +1,8 @@
- # Features added by Miss Emily - 
+  # Features added by Miss Emily - 
 👉 I have added a new Dockerfile with just a few version changes.<br>
 👉 I have added Heroku Deployment Support.For now use CLI ,I will add Tutorial and Github Actions later<br>
 👉 I have added "RESTARTED_GROUP_ID" Specify the Group here where you want the restart message to be sent by the Bot<br>
 👉 I have not added any features for now.But if I can I will add QBit<br>
- 
  
  <p align="center">
   <img width="200" src="https://media4.giphy.com/media/1jWAx072bAJwMebcl7/200w.gif?cid=82a1493bnsutnhqk7gyyjf1k0m8rbad3qp6t6gan3zf9vr6b&rid=200w.gif" alt="Material Bread logo">

@@ -2,9 +2,23 @@ import logging
 import re
 import threading
 import time
+import math
+
+import psutil
+from re import match, findall
+from threading import Thread, Event
+import threading
+from time import time
+import math
+from math import ceil
+from psutil import virtual_memory, cpu_percent, disk_usage
+from requests import head as rhead
+from urllib.request import urlopen
+from telegram import InlineKeyboardMarkup
+from telegram.ext import CallbackQueryHandler
 
 from bot.helper.telegram_helper.bot_commands import BotCommands
-from bot import download_dict, download_dict_lock
+from bot import dispatcher, download_dict, download_dict_lock, botStartTime
 
 LOGGER = logging.getLogger(__name__)
 
@@ -14,13 +28,13 @@ URL_REGEX = r"(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+"
 
 
 class MirrorStatus:
-    STATUS_UPLOADING = "Uploading"
-    STATUS_DOWNLOADING = "Downloading"
-    STATUS_WAITING = "Queued"
-    STATUS_FAILED = "Failed.Cleaning download"
-    STATUS_CANCELLED = "Cancelled "
-    STATUS_ARCHIVING = "Archiving"
-    STATUS_EXTRACTING = "Extracting"
+    STATUS_UPLOADING = "Uploading...📤"
+    STATUS_DOWNLOADING = "Downloading...📥"
+    STATUS_WAITING = "Queued...💤"
+    STATUS_FAILED = "Failed 🚫. Cleaning Download..."
+    STATUS_CANCELLED = "Cancelled...⛔️"
+    STATUS_ARCHIVING = "Archiving...🔐"
+    STATUS_EXTRACTING = "Extracting...📂"
 
 
 PROGRESS_MAX_SIZE = 100 // 8
@@ -38,8 +52,8 @@ class setInterval:
         thread.start()
 
     def __setInterval(self):
-        nextTime = time.time() + self.interval
-        while not self.stopEvent.wait(nextTime - time.time()):
+        nextTime = time() + self.interval
+        while not self.stopEvent.wait(nextTime - time()):
             nextTime += self.interval
             self.action()
 
@@ -112,7 +126,6 @@ def get_readable_message():
                 msg += f"\n<b>To Stop:-</b> <code>/{BotCommands.CancelMirror} {download.gid()}</code>"                 
             msg += "\n\n"
         return msg
-
 
 def get_readable_time(seconds: int) -> str:
     result = ''
